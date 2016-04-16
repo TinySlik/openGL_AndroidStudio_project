@@ -17,13 +17,17 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.opengles.GL10;
 
 public class MainActivity extends AppCompatActivity {
-    private MyPointRenderer1 render;
+    private  AbstractMyRenderer render;
+    private MyGLSurfaceView view;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyGLSurfaceView view = new MyGLSurfaceView(this);
+        view = new MyGLSurfaceView(this);
         //renderer:渲染器
-        render = new MyPointRenderer1();
+        render = new MyPointSizeRenderer1();
         view.setRenderer(render);
+        view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        //GLSurfaceView.RENDERMODE_CONTINUOUSLY:持续渲染
+        //GLSurfaceView.RENDERMODE_WHEN_DIRTY:脏渲染，命令渲染
         setContentView(view);
     }
 
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         }else if(keyCode == KeyEvent.KEYCODE_6){
             render.yrotate = render.yrotate + step;
         }
+        view.requestRender();
         return super.onKeyDown(keyCode, event);
     }
 }

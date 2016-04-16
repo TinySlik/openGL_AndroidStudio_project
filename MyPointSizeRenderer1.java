@@ -2,6 +2,8 @@ package com.tiny.com.ops;
 
 import android.opengl.GLU;
 
+import com.tiny.com.ops.com.tiny.com.ops.util.BufferUtil;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -14,7 +16,7 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * 点渲染器，绘制螺旋线
  */
-public class MyPointRenderer1 extends AbstractMyRenderer{
+public class MyPointSizeRenderer1 extends AbstractMyRenderer{
 
     @Override
     public void onDrawFrame(GL10 gl) {
@@ -35,26 +37,16 @@ public class MyPointRenderer1 extends AbstractMyRenderer{
         List<Float> coordsList = new ArrayList<Float>();
         float x = 0f,y = 0f,z = 1.0f;
         float zstep = 0.005f;
+        float psize = 1.0f;
+        float pstep = 0.2f;
         for( float alpha = 0f;alpha < Math.PI * 6 ; alpha = (float)(alpha + Math.PI / 32)){
             x = (float) (r * Math.cos(alpha));
             y = (float) (r * Math.sin(alpha));
-
+            gl.glPointSize(psize = psize + pstep );
             z = z - zstep;
-            coordsList.add(x);
-            coordsList.add(y);
-            coordsList.add(z);
+            gl.glVertexPointer(3,GL10.GL_FLOAT,0, BufferUtil.arr2ByteBuffer(new float[]{x,y,z}));
+            gl.glDrawArrays(GL10.GL_POINTS,0,1);
         }
-        //转换点称为缓冲区
-        ByteBuffer ibb = ByteBuffer.allocateDirect(coordsList.size() * 4);
-        ibb . order(ByteOrder.nativeOrder());
-        FloatBuffer fbb =  ibb.asFloatBuffer();
-        for(float f : coordsList)
-        {
-            fbb.put(f);
-        }
-        ibb.position(0);
-        //制定定点指针
-        gl.glVertexPointer(3,GL10.GL_FLOAT,0,ibb);
-        gl.glDrawArrays(GL10.GL_POINTS,0,coordsList.size() / 3);
+
     }
 }
