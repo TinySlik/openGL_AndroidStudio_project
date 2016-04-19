@@ -15,7 +15,7 @@ import javax.microedition.khronos.opengles.GL10;
  * 点渲染器，绘制螺旋线
  */
 public abstract class AbstractMyRenderer implements android.opengl.GLSurfaceView.Renderer{
-    private float ratio;
+    public float ratio;
 
         public float xrotate = 0f;//围绕x轴旋转角
         public float yrotate = 0f;
