@@ -31,7 +31,14 @@ public class MyTriangleConRenderer extends AbstractMyRenderer{
 
         gl.glColor4f(0f,1f,0f,1f);
 
+        //启用深度测试
         gl.glEnable(GL10.GL_DEPTH_TEST);
+        //启用表面剔除
+        gl.glEnable(GL10.GL_CULL_FACE);
+
+        gl.glFrontFace(GL10.GL_CCW);
+        //剔除背面
+        gl.glCullFace(GL10.GL_BACK);
 
         //单调模式
         gl.glShadeModel(GL10.GL_FLAT);
@@ -110,6 +117,8 @@ public class MyTriangleConRenderer extends AbstractMyRenderer{
         gl.glVertexPointer(3,GL10.GL_FLOAT,0,BufferUtil.arr2ByteBuffer(coordsList));
         gl.glDrawArrays(GL10.GL_TRIANGLE_FAN,0,coordsList.size() /3 );
 
+        //剔除正面
+        gl.glCullFace(GL10.GL_FRONT);
         //绘制锥底
         colorBuffer.position(4);
         gl.glColorPointer(4,GL10.GL_FLOAT,0,BufferUtil.arr2ByteBuffer(colorList));
