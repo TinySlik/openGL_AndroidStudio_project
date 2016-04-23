@@ -6,6 +6,7 @@ import android.util.Log;
 import com.tiny.com.ops.com.tiny.com.ops.util.BufferUtil;
 
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class MyTriangleConRenderer extends AbstractMyRenderer{
         //  清除颜色缓存 和深度缓冲区
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
-        gl.glColor4f(0f,1f,0f,1f);
+        //gl.glColor4f(0f,1f,0f,1f);
 
         //启用深度测试
         gl.glEnable(GL10.GL_DEPTH_TEST);
@@ -109,8 +110,22 @@ public class MyTriangleConRenderer extends AbstractMyRenderer{
                 colorList.add(1f);
             }
         }
+
+        if (flag = !flag)
+        {
+            colorList.add(1f);
+            colorList.add(1f);
+            colorList.add(0f);
+            colorList.add(1f);
+        }else{
+            colorList.add(1f);
+            colorList.add(0f);
+            colorList.add(0f);
+            colorList.add(1f);
+        }
+
         //颜色缓冲区
-        ByteBuffer colorBuffer = BufferUtil.arr2ByteBuffer(colorList);
+        FloatBuffer colorBuffer = BufferUtil.arr2FloatBuffer (colorList);
         gl.glColorPointer(4,GL10.GL_FLOAT,0,colorBuffer);
 
         //绘制锥面
@@ -121,7 +136,7 @@ public class MyTriangleConRenderer extends AbstractMyRenderer{
         gl.glCullFace(GL10.GL_FRONT);
         //绘制锥底
         colorBuffer.position(4);
-        gl.glColorPointer(4,GL10.GL_FLOAT,0,BufferUtil.arr2ByteBuffer(colorList));
+        gl.glColorPointer(4,GL10.GL_FLOAT,0,colorBuffer);
         gl.glVertexPointer(3,GL10.GL_FLOAT,0,BufferUtil.arr2ByteBuffer(coordsConeBottomList));
         gl.glDrawArrays(GL10.GL_TRIANGLE_FAN,0,coordsConeBottomList.size() /3 );
     }

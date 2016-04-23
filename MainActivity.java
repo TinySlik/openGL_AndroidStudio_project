@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         view = new MyGLSurfaceView(this);
         //renderer:渲染器
-        render = new MyScissorRenderer();
+        render = new MyTriangleConRenderer();
         view.setRenderer(render);
         view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         //GLSurfaceView.RENDERMODE_CONTINUOUSLY:持续渲染
