@@ -1,10 +1,7 @@
 package com.tiny.com.ops;
-
 import android.opengl.GLU;
 import android.util.Log;
-
 import com.tiny.com.ops.com.tiny.com.ops.util.BufferUtil;
-
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -69,8 +66,6 @@ public class MyTriangleConRenderer extends AbstractMyRenderer{
         coordsConeBottomList.add(0f);
         coordsConeBottomList.add(-1f);
         //顶点着色模式
-        //
-        //
 
         List<Float> colorList = new ArrayList<>();
         colorList.add(1f);
@@ -110,7 +105,7 @@ public class MyTriangleConRenderer extends AbstractMyRenderer{
                 colorList.add(1f);
             }
         }
-
+        //位移一格需要补足
         if (flag = !flag)
         {
             colorList.add(1f);
