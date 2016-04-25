@@ -27,12 +27,10 @@ public class MySphereRenderer extends AbstractMyRenderer{
         gl.glRotatef(xrotate, 1, 0, 0);
         gl.glRotatef(yrotate, 0, 1, 0);
 
-
-
-        float R = 0.5f;
-        int statck = 6 ;
+        float R = 0.7f;
+        int statck = 8 ;
         float stackStep =(float) (Math.PI / statck) ;//纬角度
-        int slice = 8;
+        int slice = 12;
         float sliceStep = (float) (Math . PI) / 8 ;//水平圆递增角度
         float r0,r1,y0,y1,x0,x1,z0,z1;
         float alpha0 = 0,alpha1 = 0;
@@ -53,7 +51,6 @@ public class MySphereRenderer extends AbstractMyRenderer{
                 z0 = (float)  (r0 * Math.sin(beta));
                 x1 = (float)  (r1 * Math.cos(beta));
                 z1 = (float)  (r1 * Math.sin(beta));
-
                 coords.add(x0);
                 coords.add(y0);
                 coords.add(z0);
@@ -65,7 +62,7 @@ public class MySphereRenderer extends AbstractMyRenderer{
 
         FloatBuffer fbb = BufferUtil.arr2FloatBuffer(coords);
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, fbb);
-        gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, coords.size() / 3);
+        gl.glDrawArrays(GL10.GL_LINE_STRIP, 0, coords.size() / 3);
 
     }
 }
