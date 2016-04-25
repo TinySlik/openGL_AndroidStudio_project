@@ -1,13 +1,10 @@
 package com.tiny.com.ops;
 
 import android.opengl.GLU;
-
 import com.tiny.com.ops.com.tiny.com.ops.util.BufferUtil;
-
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.crypto.spec.OAEPParameterSpec;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -31,7 +28,7 @@ public class MySphereRenderer extends AbstractMyRenderer{
         int statck = 8 ;
         float stackStep =(float) (Math.PI / statck) ;//纬角度
         int slice = 12;
-        float sliceStep = (float) (Math . PI) / 8 ;//水平圆递增角度
+        float sliceStep = (float) (Math . PI) / slice ;//水平圆递增角度
         float r0,r1,y0,y1,x0,x1,z0,z1;
         float alpha0 = 0,alpha1 = 0;
         float beta = 0;
@@ -63,6 +60,5 @@ public class MySphereRenderer extends AbstractMyRenderer{
         FloatBuffer fbb = BufferUtil.arr2FloatBuffer(coords);
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, fbb);
         gl.glDrawArrays(GL10.GL_LINE_STRIP, 0, coords.size() / 3);
-
     }
 }
