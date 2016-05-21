@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         view = new MyGLSurfaceView(this);
         //renderer:渲染器
-        render = new MySphereRenderer();
+        render = new MyRingRenderer();
         view.setRenderer(render);
-        //view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-        view.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        //view.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
         //GLSurfaceView.RENDERMODE_CONTINUOUSLY:持续渲染
         //GLSurfaceView.RENDERMODE_WHEN_DIRTY://脏渲染，命令渲染
         setContentView(view);
